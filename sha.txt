@@ -1,0 +1,51 @@
+import java.security.*;
+public class sha
+{
+	public static void main(String args[])
+	{
+		try{
+		MessageDigest md=MessageDigest.getInstance("SHA1");
+		System.out.println("\nMessage info: ");
+		System.out.println("\nAlgorithm: "+md.getAlgorithm());
+		System.out.println("\nprovider: "+md.getProvider());
+		System.out.println("\nto string: "+md.toString());
+		
+		String input=" ";
+		md.update(input.getBytes());
+		byte[] output=md.digest();
+		System.out.println("SHA1"+input+"="+bytesToHex(output));
+
+		input="abc";
+		md.update(input.getBytes());
+		output=md.digest();
+		System.out.println("SHA1"+input+"="+bytesToHex(output));
+
+		input="abcdefghijklmnopqrstuvwxyz";
+		md.update(input.getBytes());
+		output=md.digest();
+		System.out.println("SHA1"+input+"="+bytesToHex(output));
+		}
+		catch(Exception e){
+			System.out.println("Exception: "+e);
+		}
+	}
+
+	public static String bytesToHex(byte[] b)
+	{
+		char hexdigit[]={'0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'};
+		StringBuffer sb=new StringBuffer();
+		for(int j=0;j<b.length;j++)
+		{
+			sb.append(hexdigit[(b[j]>>4)&0x0f]);
+			sb.append(hexdigit[b[j]&0x0f]);
+		}
+		return sb.toString();
+	}
+}
+			
+
+
+
+
+
+	
